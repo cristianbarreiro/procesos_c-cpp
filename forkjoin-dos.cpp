@@ -42,7 +42,7 @@ int main() {
   
     waitpid(pid3, NULL, 0);
     waitpid(pid4, NULL, 0);
-    
+    //--s6--
     pid5 = fork();
     if(pid5 == 0) {
         printf("Ejecutando S6(PID %d)\n", getpid());
