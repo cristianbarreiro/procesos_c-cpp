@@ -8,8 +8,7 @@ pthread_mutex_t mutex;
 
 void *funcion_hilos(void *arg)
 {
-    int i;
-    for (i = 0; i < 100000; i++)
+    for (int i = 0; i < 100000; i++)
     {
         pthread_mutex_lock(&mutex);
         cont++;
@@ -22,14 +21,13 @@ int main()
     // Utilizar mutex para asegurar la sección crítica
     pthread_t hilos[NUM_HILOS];
     pthread_mutex_init(&mutex, NULL);
-    int i;
 
-    for (i = 0; i < NUM_HILOS; i++)
+    for (int i = 0; i < NUM_HILOS; i++)
     {
         pthread_create(&hilos[i], NULL, funcion_hilos, NULL);
     }
 
-    for (i = 0; i < NUM_HILOS; i++)
+    for (int i = 0; i < NUM_HILOS; i++)
     {
         pthread_join(hilos[i], NULL);
     }
