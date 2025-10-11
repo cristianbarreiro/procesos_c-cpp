@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
-
+//esta version es incorrecta necesita corregirse
 int main()
 {
     pid_t pid;
