@@ -6,8 +6,7 @@ int main()
 {
     pid_t pid1, pid2, pid3;
 
-    // Primer fork - Hijo 1
-    pid1 = fork();
+    pid1 = fork(); // Primer fork - Hijo 1
 
     if (pid1 < 0)
     {
@@ -19,16 +18,14 @@ int main()
         // Estamos en el Hijo 1
         printf("Soy el Hijo 1 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
 
-        // El Hijo 1 crea a su propio hijo (Nieto del proceso original)
-        pid3 = fork();
+        pid3 = fork(); // El Hijo 1 crea a su propio hijo (Nieto del proceso original)
 
         if (pid3 < 0)
         {
             perror("Error al crear el nieto");
             return 1;
         }
-
-        if (pid3 == 0)
+        else if (pid3 == 0)
         {
             // Nieto
             printf("  Soy el Nieto (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
@@ -37,8 +34,7 @@ int main()
     else
     {
         // Estamos todavía en el Padre
-        // Segundo fork - Hijo 2
-        pid2 = fork();
+        pid2 = fork(); // Segundo fork - Hijo 2
 
         if (pid2 < 0)
         {

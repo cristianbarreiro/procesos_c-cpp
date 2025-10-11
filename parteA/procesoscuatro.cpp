@@ -6,8 +6,7 @@ int main()
 {
     pid_t pid1, pid2, pid3, pid4;
 
-    // Padre crea primer hijo
-    pid1 = fork();
+    pid1 = fork(); // Padre crea primer hijo
 
     if (pid1 < 0)
     {
@@ -20,14 +19,14 @@ int main()
         printf("Soy el Hijo 1 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
 
         // Hijo 1 crea dos nietos
-        pid3 = fork();
+        pid3 = fork(); // Primer Nieto 1.1
         if (pid3 == 0)
         {
             printf("  Soy el Nieto 1.1 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
         }
         else
         {
-            pid4 = fork();
+            pid4 = fork(); // Segundo Nieto 1.2
             if (pid4 == 0)
             {
                 printf("  Soy el Nieto 1.2 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
@@ -50,14 +49,14 @@ int main()
             printf("Soy el Hijo 2 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
 
             // Hijo 2 crea dos nietos
-            pid3 = fork();
+            pid3 = fork(); // Primer Nieto 2.1
             if (pid3 == 0)
             {
                 printf("  Soy el Nieto 2.1 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
             }
             else
             {
-                pid4 = fork();
+                pid4 = fork(); // Segundo Nieto 2.2
                 if (pid4 == 0)
                 {
                     printf("  Soy el Nieto 2.2 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
