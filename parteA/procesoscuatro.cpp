@@ -14,8 +14,7 @@ int main()
         perror("Error al crear el primer hijo");
         return 1;
     }
-
-    if (pid1 == 0)
+    else if (pid1 == 0)
     {
         // Estamos en el Hijo 1
         printf("Soy el Hijo 1 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
@@ -45,8 +44,7 @@ int main()
             perror("Error al crear el segundo hijo");
             return 1;
         }
-
-        if (pid2 == 0)
+        else if (pid2 == 0)
         {
             // Estamos en el Hijo 2
             printf("Soy el Hijo 2 (PID: %d), hijo de (PID: %d)\n", getpid(), getppid());
