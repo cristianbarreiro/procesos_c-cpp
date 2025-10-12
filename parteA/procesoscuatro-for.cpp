@@ -1,17 +1,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
-// esta version es incorrecta necesita corregirse
-/* 
 
-
-NO PROBAR EL CÓDIGO, NO FUNCIONA CORRECTAMENTE
-
-
-*/
 int main()
 {
     pid_t pid;
+    pid_t hijo1_pid, hijo2_pid;
+
+    printf("Soy el Padre (PID: %d)", getpid());
 
     // Primer nivel: Padre crea 2 hijos
     for (int i = 0; i < 2; i++)
@@ -34,29 +30,33 @@ int main()
             {
                 pid = fork();
 
-                if (pid == 0)
+                if (pid < 0)
+                {
+                    perror("Error al crear nieto");
+                    return 1;
+                }
+                else if (pid == 0)
                 {
                     // Soy un nieto
                     printf("  Soy el Nieto %d.%d (PID: %d), hijo de (PID: %d)\n",
                            i + 1, j + 1, getpid(), getppid());
+                    return 0; // ← NIETO TERMINA AQUÍ
                 }
-                else
-                {
-                    // El hijo continúa creando más nietos
-                    continue;
-                }
-                break; // El nieto sale del bucle
+                // El hijo continúa creando más nietos
             }
-            break; // El hijo sale del bucle principal
+            return 0; // ← HIJO TERMINA AQUÍ después de crear todos sus nietos
         }
-        // El padre continúa creando más hijos
+        else
+        {
+            // Guardar PIDs de los hijos
+            if (i == 0) hijo1_pid = pid;
+            else hijo2_pid = pid;
+        }
     }
 
     // Solo el padre llega aquí
-    if (pid > 0)
-    {
-        printf("Soy el Padre (PID: %d)\n", getpid());
-    }
+    printf(", creé al Hijo 1 (PID: %d) y al Hijo 2 (PID: %d)\n", 
+           hijo1_pid, hijo2_pid);
 
     return 0;
 }
